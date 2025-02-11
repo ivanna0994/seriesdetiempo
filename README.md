@@ -153,4 +153,6 @@ sm.graphics.tsa.plot_pacf(df_daily_interpolated, lags=40, alpha=0.05)
 plt.title("Función de Autocorrelación Parcial (PACF) de la Temperatura")
 plt.show()
 ```
+![Función de autocorrelaicón de la temperatura](https://github.com/ivanna0994/seriesdetiempo/blob/main/funci%C3%B3n%20autocorrelaci%C3%B3n.png?raw=true "Función de autocorrelaicón de la temperatura")
+
 
