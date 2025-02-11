@@ -108,5 +108,7 @@ Dado que el p-valor es extremadamente pequeño (< 0.05), rechazamos la hipótesi
 Esto indica que la distribución de la temperatura no es normal, lo que sugiere que tiene sesgo, colas largas o alguna otra forma de desviación de la normalidad.
 La distribución sugiere una clara variabilidad de temperatura con una tendencia central entre 5°C y 15°C.
 El patrón cíclico probablemente indica estacionalidad anual, lo cual debe confirmarse con un análisis más profundo.
-Los eventos extremos pueden influir en los modelos de predicción, por lo que deben tratarse adecuadamente (remoción o ajuste con modelos robustos).
-Para hacer un análisis más detallado, se recomienda aplicar métodos de descomposición y autocorrelación para visualizar la dinámica temporal.
+Los eventos extremos pueden influir en los modelos de predicción, por lo que deben tratarse adecuadamente.
+Para hacer un análisis más detallado procedemos a aplicar métodos de descomposición y autocorrelación para visualizar la dinámica temporal.
+
+
