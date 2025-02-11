@@ -155,4 +155,44 @@ plt.show()
 ```
 ![Función de autocorrelaicón de la temperatura](https://github.com/ivanna0994/seriesdetiempo/blob/main/funci%C3%B3n%20autocorrelaci%C3%B3n.png?raw=true "Función de autocorrelaicón de la temperatura")
 
+![Función autocorrelación parcial](https://github.com/ivanna0994/seriesdetiempo/blob/main/Funci%C3%B3n%20autocorrelaci%C3%B3n%20parcial.png?raw=true "Función autocorrelación parcial")
+
+## Función de Autocorrelación (ACF)
+
+Se observa un patrón fuertemente periódico, con picos de correlación en torno a 365 días.
+Esto confirma la presencia de estacionalidad anual, lo cual es esperable en una serie de temperatura. También se nota una tendencia decreciente, lo que indica que los valores pasados influyen en los futuros, pero esta influencia disminuye con el tiempo.
+
+## Función de Autocorrelación Parcial (PACF)
+
+Se observa un pico fuerte en el primer lag, lo que indica que la temperatura de un día está fuertemente influenciada por la del día anterior.
+También hay picos en los retrasos correspondientes a múltiples de 365 días, lo que confirma la estacionalidad anual.
+
+La serie tiene una fuerte componente estacional con un ciclo anual (365 días), los valores pasados influyen en los futuros, especialmente en los primeros lags.
+
+
+## Prueba de Estacionariedad Dickey-Fuller Aumentado (ADF)
+
+Se realiza esta prueba para determinar si la serie necesita diferenciación
+
+```python
+from statsmodels.tsa.stattools import adfuller
+
+# Aplicar la prueba de Dickey-Fuller Aumentada (ADF)
+adf_test = adfuller(df_daily_interpolated.dropna())
+
+# Extraer los resultados
+adf_statistic = adf_test[0]
+p_value = adf_test[1]
+critical_values = adf_test[4]
+
+# Mostrar los resultados
+adf_results = {
+    "Estadístico ADF": adf_statistic,
+    "Valor p": p_value,
+    "Valores Críticos": critical_values,
+}
+
+adf_results
+```
+
 
