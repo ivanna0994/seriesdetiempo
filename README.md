@@ -28,4 +28,5 @@ Para verificar sí existen o no datos faltantes, se procede a realizar la consul
 ```
 print(df.isnull().sum())
 ```
-!([Null datos.png](https://github.com/ivanna0994/seriesdetiempo/blob/main/Null%20datos.png))
+![Null data](https://github.com/ivanna0994/seriesdetiempo/blob/main/Null%20datos.png?raw=true "Null data")
+
