@@ -111,4 +111,46 @@ El patrón cíclico probablemente indica estacionalidad anual, lo cual debe conf
 Los eventos extremos pueden influir en los modelos de predicción, por lo que deben tratarse adecuadamente.
 Para hacer un análisis más detallado procedemos a aplicar métodos de descomposición y autocorrelación para visualizar la dinámica temporal.
 
+## Descomposición de la Serie de tiempo de la Temperatura
+
+![Descomposición serie de tiempo temperatura](https://github.com/ivanna0994/seriesdetiempo/blob/main/download.png?raw=true "Descomposición serie de tiempo temperatura")
+
+### Serie Original (Gráfico 1 - Negro)
+Se observa un patrón repetitivo con fluctuaciones estacionales.
+La temperatura presenta altibajos anuales, lo que sugiere una clara estacionalidad relacionada con las estaciones del año. Hay períodos de temperaturas altas y bajas que parecen mantenerse en ciclos regulares.
+
+### Tendencia (Gráfico 2 - Azul)
+
+La temperatura muestra una ligera tendencia al alza a partir de 2013, lo que podría indicar un posible calentamiento a largo plazo. Entre 2009 y 2012, la tendencia parece más estable o ligeramente decreciente. Esto puede estar influenciado por cambios climáticos o patrones locales de variabilidad.
+
+### Estacionalidad (Gráfico 3 - Verde)
+
+Se observan ciclos claramente repetitivos cada año, lo que confirma la estacionalidad en la serie. La temperatura sigue un patrón estacional anual, con picos en meses cálidos y valles en meses fríos. Este comportamiento es característico del clima en regiones con estaciones bien definidas.
+
+### Componente Aleatoria (Ruido) (Gráfico 4 - Rojo)
+
+Representa las variaciones no explicadas por la tendencia ni la estacionalidad.
+Hay fluctuaciones más pronunciadas en ciertos períodos, lo que puede estar relacionado con eventos climáticos extremos, olas de calor o frío. Este ruido puede afectar la precisión de modelos de predicción si no se maneja adecuadamente.
+
+La serie de temperatura presenta un claro comportamiento estacional con ciclos anuales. Existe una tendencia creciente después de 2013, lo que podría sugerir un fenómeno de calentamiento progresivo. El componente aleatorio muestra fluctuaciones, lo que indica que además de la estacionalidad, hay variaciones impredecibles en los datos.
+
+Continuemos nuestro análisis con un análisis de autocorrelación
+
+## Análisis de autocorrelación
+
+```python
+import statsmodels.api as sm
+
+# Graficar la Función de Autocorrelación (ACF)
+plt.figure(figsize=(12, 5))
+sm.graphics.tsa.plot_acf(df_daily_interpolated, lags=365, alpha=0.05)
+plt.title("Función de Autocorrelación (ACF) de la Temperatura")
+plt.show()
+
+# Graficar la Función de Autocorrelación Parcial (PACF)
+plt.figure(figsize=(12, 5))
+sm.graphics.tsa.plot_pacf(df_daily_interpolated, lags=40, alpha=0.05)
+plt.title("Función de Autocorrelación Parcial (PACF) de la Temperatura")
+plt.show()
+```
 
