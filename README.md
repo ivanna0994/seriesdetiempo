@@ -23,3 +23,8 @@ file_path = '/content/jena_climate_2009_2016.csv'
 df = pd.read_csv(file_path)
 print(df.info())
 ```
+Para verificar sí existen o no datos faltantes, se procede a realizar la consulta a nuestra base de datos:
+
+```
+print(df.isnull().sum())
+```
