@@ -194,5 +194,9 @@ adf_results = {
 
 adf_results
 ```
+![Test Dickey-Fuller ](https://github.com/ivanna0994/seriesdetiempo/blob/main/dickey%20fuller.png?raw=true "Test Dickey-Fuller ")
 
+La hipótesis nula (H0) en la prueba de Dickey-Fuller establece que la serie no es estacionaria (tiene tendencia o variaciones dependientes del tiempo).
+Como el estadístico ADF (-3.59) es menor que el valor crítico al 5% (-2.86) y el p-value (0.006) es menor que 0.05, rechazamos la hipótesis nula.
+Esto indica que la serie es estacionaria a un nivel de significancia del 5%.
 
