@@ -1,5 +1,8 @@
-# Detección de Patrones Climáticos a través del Análisis de Series Temporales de Temperatura utilizando modelos [opción escogida]
+# Predicción de la Temperatura del Aire: Comparación y Optimización de Modelos de Series de Tiempo y Aprendizaje Automático
 
+Pregunta de investigación:
+¿Cuál es la estrategia más precisa y eficiente para predecir la temperatura del aire: modelos de series de tiempo que capturan autocorrelaciones o modelos de regresión basados en variables climáticas? Además, ¿es posible desarrollar un modelo mejorado que optimice la precisión de las predicciones mediante técnicas de series de tiempo y aprendizaje automático?
+ 
 El conjunto de datos Jena Climate es una serie temporal meteorológica registrada en la estación meteorológica del Instituto Max Planck de Bioquímica en Jena, Alemania.
 Este se encuentra compuesto por 14 variables diferentes (como la temperatura del aire, la presión atmosférica, la humedad, la dirección del viento, entre otras) que fueron registradas cada 10 minutos durante varios años.
 
