@@ -206,3 +206,4 @@ Esto indica que la serie es estacionaria a un nivel de significancia del 5%.
 ## Visualización de la media y varianza en submuestras
 Esto con el fin de evaluar si cambian con el tiempo.
 
+![Media y varianza submuestras](https://github.com/ivanna0994/seriesdetiempo/blob/main/media%20varianza%20submuestras.png?raw=true "Media y varianza submuestras")
