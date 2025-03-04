@@ -207,3 +207,10 @@ Esto indica que la serie es estacionaria a un nivel de significancia del 5%.
 Esto con el fin de evaluar si cambian con el tiempo.
 
 ![Media y varianza submuestras](https://github.com/ivanna0994/seriesdetiempo/blob/main/media%20varianza%20submuestras.png?raw=true "Media y varianza submuestras")
+
+Se observa un aumento progresivo en la media de la temperatura a medida que avanzamos en el tiempo. El primer segmento tiene una media más baja, mientras que los segmentos posteriores muestran valores crecientes. Esto indica que la serie presenta tendencia ascendente, lo que sugiere que no es estacionaria en media.
+
+La varianza disminuye en los segmentos posteriores en comparación con el primer segmento. La varianza cambia con el tiempo, esto indica que la serie también podría no ser estacionaria en varianza.
+
+## Transformación de los datos
+
