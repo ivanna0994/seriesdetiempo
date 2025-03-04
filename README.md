@@ -203,3 +203,6 @@ La hipótesis nula (H0) en la prueba de Dickey-Fuller establece que la serie no 
 Como el estadístico ADF (-3.59) es menor que el valor crítico al 5% (-2.86) y el p-value (0.006) es menor que 0.05, rechazamos la hipótesis nula.
 Esto indica que la serie es estacionaria a un nivel de significancia del 5%.
 
+#Visualización de la media y varianza en submuestras
+Esto con el fin de evaluar si cambian con el tiempo.
+
