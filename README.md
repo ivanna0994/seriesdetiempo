@@ -218,7 +218,8 @@ La tendencia en la serie sugiere que debemos aplicar diferenciación, que consis
 
 # Serie diferenciada
 
-![Serie Diferenciada](https://github.com/ivanna0994/seriesdetiempo/blob/main/serie%20de%20tiempo%20diferenciada.png "Serie Diferenciada")
+![Serie Diferenciada](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/serie%20de%20tiempo%20diferenciada.png)
+
 
 Si la varianza cambia con el tiempo, podemos aplicar una transformación 
 
