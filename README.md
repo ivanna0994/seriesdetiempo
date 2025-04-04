@@ -288,13 +288,13 @@ El espectro de potencia de la temperatura muestra que las variaciones de tempera
 
 # Detección de picos inusuales en la temperatura
 
-![Picos inusuales](https://raw.githubusercontent.com)/ivanna0994/seriesdetiempo/blob/main/Picos%20inusuales.png "Picos inusuales")
+![Picos inusuales](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/Picos%20inusuales.png)
 
 Los picos rojos en la gráfica indican eventos donde la temperatura alcanza valores extremos, como picos inusuales de calor o frío que no coinciden con el patrón cíclico habitual. Es posible que estos picos rojos representen eventos como olas de calor o heladas atípicas. La serie temporal muestra una periodicidad evidente, probablemente debida a variaciones estacionales (calor en verano y frío en invierno), mientras que las anomalías corresponden a eventos que se desvían de esta periodicidad. En resumen, la gráfica muestra cómo la temperatura varía a lo largo del tiempo, con algunos valores atípicos o extremos marcados como anomalías, lo que permite identificar eventos climáticos excepcionales.
 
 # Prueba para detectar outliers
 
-![Outliers](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/blob/main/Outliers.png "Outliers")
+![Outliers](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/Outliers.png)
 
 Rango central (IQR): La mayoría de los datos de temperatura se encuentran dentro del rango entre -10°C y 30°C, con la mediana cerca de los 10°C. Outliers: Los puntos fuera de los bigotes, ubicados por encima de 30°C y por debajo de -20°C, son considerados outliers. Estos valores son inusuales y podrían indicar fenómenos extremos o errores en los datos. Distribución de los datos: La temperatura tiene una distribución que se centra principalmente alrededor de la mediana (aproximadamente 10°C), con algunas fluctuaciones hacia valores más bajos y más alto.
 
