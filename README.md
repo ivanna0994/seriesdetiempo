@@ -212,5 +212,87 @@ Se observa un aumento progresivo en la media de la temperatura a medida que avan
 
 La varianza disminuye en los segmentos posteriores en comparación con el primer segmento. La varianza cambia con el tiempo, esto indica que la serie también podría no ser estacionaria en varianza.
 
-## Transformación de los datos
+Según el análisis previo, la serie no es estacionaria porque tiene una tendencia creciente en la media y una varianza cambiante
+
+La tendencia en la serie sugiere que debemos aplicar diferenciación, que consiste en restar el valor actual con el valor anterior.
+
+# Serie diferenciada
+
+![Serie Diferenciada](https://github.com/ivanna0994/seriesdetiempo/blob/main/serie%20de%20tiempo%20diferenciada.png "Serie Diferenciada")
+
+Si la varianza cambia con el tiempo, podemos aplicar una transformación 
+
+Hay picos extremos negativos que podrían indicar outliers, pero no parecen formar patrones persistentes de cambio de varianza. Visualmente, no se detecta heterocedasticidad clara (es decir, no hay un ensanchamiento o estrechamiento progresivo de la amplitud de la serie).
+
+# Transformación de los datos
+
+![Transformación logaritmica](https://github.com/ivanna0994/seriesdetiempo/blob/main/Transformaci%C3%B3n.png "Transformación logaritmica")
+
+Después de estos ajustes, debemos volver a aplicar la prueba Dickey-Fuller (ADF) para verificar si la serie ya es estacionaria.
+
+# Prueba Dickey - Fuller 
+# Estadístico ADF: -6.735583526083349
+p-valor: 3.21385243908857e-09
+Valores críticos: {'1%': -3.4305057071359926, '5%': -2.8616088190674343, '10%': -2.5668066301638324}
+
+El estadístico ADF (-6.7356) es más bajo que todos los valores críticos (1%, 5%, 10%).
+La serie es estacionaria. 
+Dado esto podemos: 
+Modelar con SARIMA o ARIMA sin diferenciación adicional.
+Utilizar la serie directamente en LSTM, como ya hicimos.
+Incluir otras variables climáticas (humedad, presión, viento) si quieres extender el modelo a una versión multivariada.
+
+# Matriz de Correlación entre Series Temporales
+![Matriz de correlación ](https://github.com/ivanna0994/seriesdetiempo/blob/main/Matriz%20de%20correlaci%C3%B3n.png "Matriz de correlación ")
+
+En la matriz de correlación presentada en la imagen, se puede observar que la variable Tdew (degC) tiene una alta correlación positiva con T (degC), con un valor de 0.90. Esto indica que tanto la temperatura del aire (T) como la temperatura de rocío (Tdew) están fuertemente relacionadas.
+
+También se destaca que T (degC) tiene una correlación positiva significativa con las variables Tpot (K) (0.89), VPmax (mbar) (0.95), y VPact (mbar) (0.87). Estas relaciones sugieren que las variables relacionadas con la humedad y la presión del aire (como VPmax y VPact) están fuertemente influenciadas por la temperatura.
+
+Por último, es relevante mencionar que T (degC) está correlacionada negativamente con la variable rho (g/m³), con un valor de -0.96, lo que indica que, a medida que la temperatura aumenta, la densidad del aire disminuye.
+
+# Gráficos de Dispersión en el Tiempo
+Estos gráficos los realizaremos con el objetivo de detectar relaciones no lineales entre la temperatura y otras variables.
+
+![Dispersión ](https://github.com/ivanna0994/seriesdetiempo/blob/main/Gr%C3%A1ficos%20de%20dispersi%C3%B3n.png "Dispersión ")
+
+En los gráficos se puede observar que la variable T (degC) (Temperatura) tiene varias relaciones no lineales con otras variables meteorológicas. A continuación, se analizan algunas de estas relaciones:
+
+Temperatura vs Humedad (%): La relación entre la temperatura y la humedad relativa parece ser no lineal. A medida que la temperatura aumenta, la humedad tiende a disminuir, pero de manera más pronunciada en los valores más bajos de temperatura. Esta curva sugiere que la humedad relativa disminuye rápidamente con el aumento de la temperatura, lo que es común en las condiciones meteorológicas donde el aire más caliente puede contener más vapor de agua.
+
+Temperatura vs Presión (mbar): La relación entre temperatura y presión también parece ser no lineal, con una ligera disminución de la presión conforme la temperatura aumenta, pero la pendiente de la curva varía a lo largo de los valores de temperatura. Esta relación refleja cómo la temperatura afecta a la densidad del aire y, por ende, a la presión atmosférica, aunque la tendencia no es tan estrictamente lineal.
+
+Temperatura vs Velocidad del Viento (wv): En este gráfico, se observa una fuerte dispersión de los valores de velocidad del viento en temperaturas tanto frías como cálidas. La mayoría de los valores se concentran cerca de cero, con algunos valores extremos negativos y positivos en temperaturas bajas. Esto indica que no hay una relación clara y lineal entre la temperatura y la velocidad del viento en los datos observados, posiblemente por la presencia de datos atípicos.
+
+Temperatura vs Presión de Vapor (Vpact, mbar): La relación entre la temperatura y la presión de vapor parece seguir una curva exponencial. A medida que la temperatura aumenta, la presión de vapor aumenta de manera más pronunciada, lo que refleja la mayor capacidad del aire para retener vapor de agua a temperaturas más altas. Esta relación es un ejemplo típico de un comportamiento no lineal, ya que la presión de vapor aumenta de forma acelerada con la temperatura.
+
+En resumen, varias de las relaciones entre la temperatura y otras variables son no lineales, lo que sugiere que los cambios en las variables meteorológicas no siguen una simple regla lineal, sino que presentan un comportamiento más complejo y en algunos casos exponencial, especialmente en lo que respecta a la presión de vapor.
+
+# Análisis de la Transformada de Fourier
+
+Procedemos a realizar este análisis con el fin de detectar frecuencias dominantes en la serie.
+
+![Transformada](https://github.com/ivanna0994/seriesdetiempo/blob/main/Transformada%20fourier.png "Transformada")
+
+Gráfica Transformada de Fourier Después del pico inicial, la magnitud disminuye rápidamente a medida que aumenta la frecuencia. Esto indica que las componentes de alta frecuencia de la señal tienen una magnitud mucho menor, lo que puede sugerir que la señal es relativamente suave y no presenta fluctuaciones rápidas.
+
+Este espectro de frecuencia muestra que la señal tiene una fuerte componente de baja frecuencia, lo que implica que las fluctuaciones importantes de la señal ocurren a una escala temporal más larga (posiblemente ciclos estacionales o de largo plazo). Las componentes de alta frecuencia tienen poca magnitud, lo que indica que las fluctuaciones rápidas son menos significativas.
+
+Espectro de potencia de la temperatura
+
+El gráfico muestra un pico muy pronunciado en una frecuencia específica (cerca de 0.005 ciclos por día), lo que podría indicar que existe una componente de baja frecuencia dominando la variabilidad de la temperatura. Este pico podría estar asociado con patrones cíclicos, como las fluctuaciones diarias o estacionales de la temperatura.
+
+El espectro de potencia de la temperatura muestra que las variaciones de temperatura se concentran principalmente en frecuencias bajas, lo que indica que los cambios más significativos de temperatura ocurren a una escala temporal más larga, como los ciclos diarios o estacionales.
+
+# Detección de picos inusuales en la temperatura
+
+![Picos inusuales](https://github.com/ivanna0994/seriesdetiempo/blob/main/Picos%20inusuales.png "Picos inusuales")
+
+Los picos rojos en la gráfica indican eventos donde la temperatura alcanza valores extremos, como picos inusuales de calor o frío que no coinciden con el patrón cíclico habitual. Es posible que estos picos rojos representen eventos como olas de calor o heladas atípicas. La serie temporal muestra una periodicidad evidente, probablemente debida a variaciones estacionales (calor en verano y frío en invierno), mientras que las anomalías corresponden a eventos que se desvían de esta periodicidad. En resumen, la gráfica muestra cómo la temperatura varía a lo largo del tiempo, con algunos valores atípicos o extremos marcados como anomalías, lo que permite identificar eventos climáticos excepcionales.
+
+# Prueba para detectar outliers
+
+![Outliers](https://github.com/ivanna0994/seriesdetiempo/blob/main/Outliers.png "Outliers")
+
+Rango central (IQR): La mayoría de los datos de temperatura se encuentran dentro del rango entre -10°C y 30°C, con la mediana cerca de los 10°C. Outliers: Los puntos fuera de los bigotes, ubicados por encima de 30°C y por debajo de -20°C, son considerados outliers. Estos valores son inusuales y podrían indicar fenómenos extremos o errores en los datos. Distribución de los datos: La temperatura tiene una distribución que se centra principalmente alrededor de la mediana (aproximadamente 10°C), con algunas fluctuaciones hacia valores más bajos y más alto.
 
