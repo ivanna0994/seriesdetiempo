@@ -227,7 +227,8 @@ Hay picos extremos negativos que podrían indicar outliers, pero no parecen form
 
 # Transformación de los datos
 
-![Transformación logaritmica](https://github.com/ivanna0994/seriesdetiempo/blob/main/Transformaci%C3%B3n.png "Transformación logaritmica")
+![Transformación logarítmica](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/Transformaci%C3%B3n.png)
+
 
 Después de estos ajustes, debemos volver a aplicar la prueba Dickey-Fuller (ADF) para verificar si la serie ya es estacionaria.
 
@@ -244,7 +245,7 @@ Utilizar la serie directamente en LSTM, como ya hicimos.
 Incluir otras variables climáticas (humedad, presión, viento) si quieres extender el modelo a una versión multivariada.
 
 # Matriz de Correlación entre Series Temporales
-![Matriz de correlación ](https://github.com/ivanna0994/seriesdetiempo/blob/main/Matriz%20de%20correlaci%C3%B3n.png "Matriz de correlación ")
+![Matriz de correlación](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/Matriz%20de%20correlaci%C3%B3n.png)
 
 En la matriz de correlación presentada en la imagen, se puede observar que la variable Tdew (degC) tiene una alta correlación positiva con T (degC), con un valor de 0.90. Esto indica que tanto la temperatura del aire (T) como la temperatura de rocío (Tdew) están fuertemente relacionadas.
 
@@ -255,7 +256,7 @@ Por último, es relevante mencionar que T (degC) está correlacionada negativame
 # Gráficos de Dispersión en el Tiempo
 Estos gráficos los realizaremos con el objetivo de detectar relaciones no lineales entre la temperatura y otras variables.
 
-![Dispersión ](https://github.com/ivanna0994/seriesdetiempo/blob/main/Gr%C3%A1ficos%20de%20dispersi%C3%B3n.png "Dispersión ")
+![Dispersión](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/Gr%C3%A1ficos%20de%20dispersi%C3%B3n.png)
 
 En los gráficos se puede observar que la variable T (degC) (Temperatura) tiene varias relaciones no lineales con otras variables meteorológicas. A continuación, se analizan algunas de estas relaciones:
 
@@ -273,7 +274,7 @@ En resumen, varias de las relaciones entre la temperatura y otras variables son 
 
 Procedemos a realizar este análisis con el fin de detectar frecuencias dominantes en la serie.
 
-![Transformada](https://github.com/ivanna0994/seriesdetiempo/blob/main/Transformada%20fourier.png "Transformada")
+![Transformada](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/Transformada%20fourier.png)
 
 Gráfica Transformada de Fourier Después del pico inicial, la magnitud disminuye rápidamente a medida que aumenta la frecuencia. Esto indica que las componentes de alta frecuencia de la señal tienen una magnitud mucho menor, lo que puede sugerir que la señal es relativamente suave y no presenta fluctuaciones rápidas.
 
@@ -287,13 +288,13 @@ El espectro de potencia de la temperatura muestra que las variaciones de tempera
 
 # Detección de picos inusuales en la temperatura
 
-![Picos inusuales](https://github.com/ivanna0994/seriesdetiempo/blob/main/Picos%20inusuales.png "Picos inusuales")
+![Picos inusuales](https://raw.githubusercontent.com)/ivanna0994/seriesdetiempo/blob/main/Picos%20inusuales.png "Picos inusuales")
 
 Los picos rojos en la gráfica indican eventos donde la temperatura alcanza valores extremos, como picos inusuales de calor o frío que no coinciden con el patrón cíclico habitual. Es posible que estos picos rojos representen eventos como olas de calor o heladas atípicas. La serie temporal muestra una periodicidad evidente, probablemente debida a variaciones estacionales (calor en verano y frío en invierno), mientras que las anomalías corresponden a eventos que se desvían de esta periodicidad. En resumen, la gráfica muestra cómo la temperatura varía a lo largo del tiempo, con algunos valores atípicos o extremos marcados como anomalías, lo que permite identificar eventos climáticos excepcionales.
 
 # Prueba para detectar outliers
 
-![Outliers](https://github.com/ivanna0994/seriesdetiempo/blob/main/Outliers.png "Outliers")
+![Outliers](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/blob/main/Outliers.png "Outliers")
 
 Rango central (IQR): La mayoría de los datos de temperatura se encuentran dentro del rango entre -10°C y 30°C, con la mediana cerca de los 10°C. Outliers: Los puntos fuera de los bigotes, ubicados por encima de 30°C y por debajo de -20°C, son considerados outliers. Estos valores son inusuales y podrían indicar fenómenos extremos o errores en los datos. Distribución de los datos: La temperatura tiene una distribución que se centra principalmente alrededor de la mediana (aproximadamente 10°C), con algunas fluctuaciones hacia valores más bajos y más alto.
 
