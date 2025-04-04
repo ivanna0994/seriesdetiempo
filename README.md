@@ -298,3 +298,54 @@ Los picos rojos en la gráfica indican eventos donde la temperatura alcanza valo
 
 Rango central (IQR): La mayoría de los datos de temperatura se encuentran dentro del rango entre -10°C y 30°C, con la mediana cerca de los 10°C. Outliers: Los puntos fuera de los bigotes, ubicados por encima de 30°C y por debajo de -20°C, son considerados outliers. Estos valores son inusuales y podrían indicar fenómenos extremos o errores en los datos. Distribución de los datos: La temperatura tiene una distribución que se centra principalmente alrededor de la mediana (aproximadamente 10°C), con algunas fluctuaciones hacia valores más bajos y más alto.
 
+# Resumen de Hallazgos Claves
+
+Patrones Generales
+
+Tendencia Ascendente: La temperatura media diaria muestra un aumento a lo largo de los años, lo que sugiere un posible cambio climático o variabilidad climática de largo plazo. 
+Estacionalidad Anual Fuerte: Se observan ciclos recurrentes con picos en verano y bajas temperaturas en invierno, confirmados por la descomposición de la serie y el análisis de autocorrelación (ACF y PACF). 
+Dependencia Temporal: La temperatura de un día está altamente correlacionada con los días anteriores, lo que justifica el uso de modelos como SARIMA o modelos autoregresivos.
+
+Anomalías y Eventos Extremos
+
+Picos inusuales identificados mediante análisis visual y pruebas estadísticas (IQR y Z-score).  Algunos outliers coinciden con eventos climáticos extremos como olas de calor o fríos intensos. ✔Otros valores atípicos pueden deberse a errores de medición, que podrían afectar la precisión de los modelos predictivos.
+
+Análisis de Estacionariedad
+
+ La serie original NO era estacionaria, debido a la tendencia ascendente. La diferenciación (d=1) permitió hacerla estacionaria, confirmada por la prueba Dickey-Fuller (ADF). Los ciclos estacionales sugieren que un modelo SARIMA es más adecuado que un ARIMA simple.
+
+#Pasos a seguir:
+
+Ajustes para la Modelización
+
+🔹 SARIMA (p,d,q)(P,D,Q,s) 
+✔ Captura tanto la tendencia como la estacionalidad anual. 
+✔ Se recomienda optimizar los parámetros con técnicas como Grid Search o Auto-SARIMA.
+
+🔹 Modelos más avanzados
+
+✔ Transformers Temporales (TFT) o DeepAR podrían mejorar la predicción capturando mejor patrones no lineales. 
+✔ Procesos Gaussianos pueden ser útiles para modelar incertidumbre en predicciones.
+
+Manejo de Problemas Detectados
+
+🔹 No Estacionariedad 
+✔ Aplicar diferenciación (ya realizada). 
+✔ Usar modelos con términos estacionales (SARIMA, Prophet, LSTM con ventanas de tiempo).
+
+🔹 Valores Atípicos
+
+✔ Eliminar outliers si son errores de medición. 
+✔ Mantener outliers si representan eventos climáticos reales y usarlos para entrenar modelos de predicción de eventos extremos.
+
+🔹 Mejorar la Calidad de Datos
+
+✔ Normalizar o estandarizar la temperatura para mejorar la estabilidad del modelo. 
+✔ Evaluar otras variables climáticas (humedad, presión, viento) para mejorar la predicción con un enfoque multivariado.
+
+Conclusión Final
+
+✔ La serie de temperatura es predecible con modelos estacionales debido a su fuerte periodicidad. 
+✔ La eliminación de outliers y la diferenciación mejoran la precisión de los modelos.
+✔ Probas con modelos SARIMA, LSTM, o Modelos Transformers para optimizar las predicciones.
+
