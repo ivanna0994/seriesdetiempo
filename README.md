@@ -347,6 +347,115 @@ Manejo de Problemas Detectados
 ✔ Normalizar o estandarizar la temperatura para mejorar la estabilidad del modelo. 
 ✔ Evaluar otras variables climáticas (humedad, presión, viento) para mejorar la predicción con un enfoque multivariado.
 
+# Modelo SARIMA
+Ejecutaremos el modelo SARIMA(1,1,1)(1,1,0,52)
+
+```python
+# Resampleo semanal 
+df_weekly = df['T (degC)'].resample('W').mean()
+df_weekly = df_weekly[:'2013']
+
+
+modelo_refinado = SARIMAX(
+    df_weekly,
+    order=(1, 1, 1),
+    seasonal_order=(1, 1, 0, 52),  # ← sin ma estacional
+    enforce_stationarity=False,
+    enforce_invertibility=False
+).fit(disp=False)
+
+# Mostrar resumen
+print(modelo_refinado.summary())
+
+# Graficar ajuste
+df_weekly.plot(label='Observado', figsize=(14, 5))
+modelo_refinado.fittedvalues.plot(label='Ajustado')
+plt.title("SARIMA Refinado (1,1,1)(1,1,0,52)")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Pronóstico 52 semanas
+forecast = modelo_refinado.forecast(steps=52)
+forecast.plot(title="Pronóstico 1 año - Modelo Refinado", figsize=(14, 5))
+plt.grid(True)
+plt.show()
+
+```
+Hemos ejecutado el modelo SARIMA(1,1,1)(1,1,0,52) y ahora sí los resultados son estables y bien condicionados. Vamos a analizarlos:
+
+[![Sarima Refinado](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Sarima%20refinado.png?raw=true "Sarima Refinado")](http://https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Sarima%20refinado.png?raw=true "Sarima Refinado")
+
+Esta gráfica muestra la comparación entre la serie de temperatura observada (línea azul) y la serie ajustada por el modelo SARIMA(1,1,1)(1,1,0,52) (línea naranja), utilizando datos semanales de temperatura promedio en Jena (Alemania) entre 2009 y 2013.
+
+El modelo logra capturar correctamente la estacionalidad anual, con picos en verano y descensos en invierno, como se aprecia en las repeticiones cíclicas. También se observa que el modelo sigue bien la tendencia general de la serie, adaptándose a los cambios interanuales.
+
+[![Pronostico a un año](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Figure_1.png?raw=true "Pronostico a un año")](http://https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Figure_1.png?raw=true "Pronostico a un año")
+
+El modelo logra proyectar un patrón estacional coherente y suavizado, lo que indica un buen ajuste y capacidad predictiva. La curva muestra una transición gradual entre estaciones, sin picos atípicos ni irregularidades, lo que es una señal de estabilidad del modelo.
+
+[![Resultados](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Sarima%20Optimizado.png?raw=true "Resultados")](http://https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Sarima%20Optimizado.png?raw=true "Resultados")
+
+**Estructura:**
+
+```python
+SARIMAX(1, 1, 1)x(1, 1, [], 52)
+
+```
+
+Parte no estacional: ARIMA(1,1,1)
+
+Parte estacional: SAR(1), D=1, s=52 (sin MA estacional)
+
+**Indicadores de Ajuste**
+
+| Métrica | Valor   | Comparación con modelo anterior                                              |
+|---------|---------|------------------------------------------------------------------------------|
+| AIC     | 847.49  | 🔻 ¡Mejoró! (antes 5335.3, pero en log-likelihood diferente)                 |
+| BIC     | 859.67  | Consistente con menor complejidad                                            |
+| HQIC    | 852.44  | También bajó                                                                 |
+
+**Coeficientes del Modelo**
+
+| Parámetro   | Coef  | p-valor | ¿Significativo? | Observación                                 |
+|-------------|-------|---------|------------------|----------------------------------------------|
+| ar.L1       | 0.433 | 0.000   | ✅ Sí            | Influencia directa del rezago                |
+| ma.L1       | -1.000| 0.988   | ❌ No            | No significativo, posible sobreajuste        |
+| ar.S.L52    | -0.653| 0.000   | ✅ Sí            | Fuerte estacionalidad anual                  |
+| sigma2      | 12.85 | 0.988   | ❌ No            | Alta incertidumbre en la varianza residual   |
+
+**Diagnosticos de resultados**
+
+| Prueba                 | Resultado | Interpretación                                 |
+|------------------------|-----------|------------------------------------------------|
+| Ljung-Box (Q)          | 0.13      | ✅ No hay autocorrelación                      |
+| Jarque-Bera (JB)       | 0.01      | ❌ Residuos no son normales                    |
+| Heterocedasticidad H   | 0.68      | ✅ Varianza residual aceptable                 |
+| Kurtosis               | 4.07      | Leve colas pesadas, normal en clima           |
+
+Comentarios: 
+Aunque ma.L1 no es significativo, mantenerlo no genera inestabilidad 
+El modelo es más estable y estadísticamente más confiable.
+
+**Métricas de Predicción**
+
+[![Metricas](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Metricas%20de%20predicci%C3%B3n.png?raw=true "Metricas")](http://https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Metricas%20de%20predicci%C3%B3n.png?raw=true "Metricas")
+
+El RMSE indica un error promedio de 3.44°C en las predicciones semanales. El MAPE de 94% es alto indica que el modelo falla en capturar algunos patrones o los valores son muy cercanos a cero (lo que distorsiona el MAPE)
+
+Posiblemente hay semanas con valores muy pequeños (cerca de 0 °C) que están inflando el MAPE. Aun así, el RMSE es aceptable.
+
+Aunque los residuos no son normales (común en datos climáticos), no hay autocorrelación ni heterocedasticidad significativa.
+
+ El modelo captura bien la estructura temporal, especialmente la estacionalidad.
+
+El MAPE alto sugiere explorar ajustes, por ejemplo:
+
+Normalizar/estandarizar la temperatura
+Eliminar ma.L1
+Probar modelos no lineales como Prophet o LSTM
+
+
 Conclusión Final
 
 ✔ La serie de temperatura es predecible con modelos estacionales debido a su fuerte periodicidad. 
