@@ -347,6 +347,10 @@ Manejo de Problemas Detectados
 ✔ Normalizar o estandarizar la temperatura para mejorar la estabilidad del modelo. 
 ✔ Evaluar otras variables climáticas (humedad, presión, viento) para mejorar la predicción con un enfoque multivariado.
 
+Conclusión Final
+
+ La serie de temperatura es predecible con modelos estacionales debido a su fuerte periodicidad.  La eliminación de outliers y la diferenciación mejoran la precisión de los modelos. Probar con modelos SARIMA, LSTM, o Modelos Transformers para optimizar las predicciones.
+
 # Modelo SARIMA
 Ejecutaremos el modelo SARIMA(1,1,1)(1,1,0,52)
 
@@ -447,18 +451,12 @@ Posiblemente hay semanas con valores muy pequeños (cerca de 0 °C) que están
 
 Aunque los residuos no son normales (común en datos climáticos), no hay autocorrelación ni heterocedasticidad significativa.
 
- El modelo captura bien la estructura temporal, especialmente la estacionalidad.
-
-El MAPE alto sugiere explorar ajustes, por ejemplo:
+El modelo captura bien la estructura temporal, especialmente la estacionalidad. El MAPE alto sugiere explorar ajustes, por ejemplo:
 
 Normalizar/estandarizar la temperatura
 Eliminar ma.L1
 Probar modelos no lineales como Prophet o LSTM
 
 
-Conclusión Final
 
-✔ La serie de temperatura es predecible con modelos estacionales debido a su fuerte periodicidad. 
-✔ La eliminación de outliers y la diferenciación mejoran la precisión de los modelos.
-✔ Probas con modelos SARIMA, LSTM, o Modelos Transformers para optimizar las predicciones.
 
