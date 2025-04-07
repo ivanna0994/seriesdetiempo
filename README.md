@@ -73,7 +73,7 @@ Procedemos a construir un nuevo dataset con las variables de interés mencionada
 data=df[['Date Time','T (degC)']]
 data
 ```
-![Vista previa de los datos](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/figuras/data%20head.png) 
+![Vista previa de los datos](/figuras/datahead.png)
 
 
 # Graficamos la Distribución de la Temperatura en un histograma
