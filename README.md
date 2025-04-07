@@ -453,10 +453,9 @@ Aunque los residuos no son normales (común en datos climáticos), no hay autoco
 
 El modelo captura bien la estructura temporal, especialmente la estacionalidad. El MAPE alto sugiere explorar ajustes, por ejemplo:
 
-Normalizar/estandarizar la temperatura
-Eliminar ma.L1
-Probar modelos no lineales como Prophet o LSTM
-
+1. Normalizar/estandarizar la temperatura
+2. Eliminar ma.L1
+3. Probar modelos no lineales como Prophet o LSTM
 
 
 
