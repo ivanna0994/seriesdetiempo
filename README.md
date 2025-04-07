@@ -31,7 +31,7 @@ Para verificar sí existen o no datos faltantes, se procede a realizar la consul
 ```
 print(df.isnull().sum())
 ```
-![Null data](https://github.com/ivanna0994/seriesdetiempo/blob/main/Null%20datos.png?raw=true "Null data")
+![null data](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Null%20datos.png "null data")
 
 Encontrándose así que no existen datos nulos. 
 
@@ -53,7 +53,7 @@ temperature_stats = df['T (degC)'].describe()
 print(temperature_stats)
 ```
 
-![stats temperature](https://github.com/ivanna0994/seriesdetiempo/blob/main/temperature%20stats.png?raw=true "stats temperature")
+![stats temperature](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/temperature%20stats.png)
 
 Como se mencionó anteriormente, para la variable Temperatura en grados celsius, se tienen 420551 observaciones, con una media de 9.45° y una desviación estándar de 8.42°. Dentro de estas observaciones el valor mínimo que toma esta variable es de -23.01° mientras que su valor máximo es de 37.28°. Es importante señalar que el cincuenta por ciento de las temperaturas registradas se encuentra por encima de 9.42°.
 
