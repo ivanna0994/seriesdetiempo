@@ -54,7 +54,8 @@ temperature_stats = df['T (degC)'].describe()
 print(temperature_stats)
 ```
 
-![stats temperature](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/temperature%20stats.png)
+![Estadísticas de temperatura](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/figuras/temperature%20stats.png)
+
 
 Como se mencionó anteriormente, para la variable Temperatura en grados celsius, se tienen 420551 observaciones, con una media de 9.45° y una desviación estándar de 8.42°. Dentro de estas observaciones el valor mínimo que toma esta variable es de -23.01° mientras que su valor máximo es de 37.28°. Es importante señalar que el cincuenta por ciento de las temperaturas registradas se encuentra por encima de 9.42°.
 
@@ -72,7 +73,8 @@ Procedemos a construir un nuevo dataset con las variables de interés mencionada
 data=df[['Date Time','T (degC)']]
 data
 ```
-![data head ](https://github.com/ivanna0994/seriesdetiempo/blob/main/data%20head.png?raw=true "data head ")
+![Vista previa de los datos](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/figuras/data%20head.png) 
+
 
 # Graficamos la Distribución de la Temperatura en un histograma
 ```python
@@ -86,7 +88,8 @@ plt.ylabel("Frecuencia")
 plt.title("Distribución de la Temperatura")
 plt.show()
 ```
-![Distribución de la temperatura](https://github.com/ivanna0994/seriesdetiempo/blob/main/distribuci%C3%B3n%20de%20la%20temperatura.png?raw=true "Distribución de la temperatura")
+
+![Distribución de la temperatura](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/figuras/distribución%20de%20la%20temperatura.png) 
 
 La forma de la distribución es aproximadamente normal, lo que sugiere que la temperatura varía de manera continua alrededor de un rango típico (5°C a 15°C).
 Sin embargo, la presencia de valores negativos y extremos indica que hay variaciones estacionales o eventos climáticos que afectan la temperatura a lo largo del tiempo.
@@ -105,7 +108,7 @@ if p > alpha:
 else:
  print('Sample does not look Normal (reject H0)')
 ```
-![Prueba Shapiro](https://github.com/ivanna0994/seriesdetiempo/blob/main/shapiro-wilks.png?raw=true "Prueba Shapiro")
+![Prueba Shapiro](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/shapiro-wilks.png?raw=true "Prueba Shapiro")
 
 La hipótesis nula del test establece que los datos siguen una distribución normal.
 Dado que el p-valor es extremadamente pequeño (< 0.05), rechazamos la hipótesis nula.
@@ -117,7 +120,7 @@ Para hacer un análisis más detallado procedemos a aplicar métodos de descompo
 
 ## Descomposición de la Serie de tiempo de la Temperatura
 
-![Descomposición serie de tiempo temperatura](https://github.com/ivanna0994/seriesdetiempo/blob/main/download.png?raw=true "Descomposición serie de tiempo temperatura")
+![Descomposición serie de tiempo temperatura](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/download.png?raw=true "Descomposición serie de tiempo temperatura")
 
 ### Serie Original (Gráfico 1 - Negro)
 Se observa un patrón repetitivo con fluctuaciones estacionales.
@@ -157,9 +160,9 @@ sm.graphics.tsa.plot_pacf(df_daily_interpolated, lags=40, alpha=0.05)
 plt.title("Función de Autocorrelación Parcial (PACF) de la Temperatura")
 plt.show()
 ```
-![Función de autocorrelaicón de la temperatura](https://github.com/ivanna0994/seriesdetiempo/blob/main/funci%C3%B3n%20autocorrelaci%C3%B3n.png?raw=true "Función de autocorrelaicón de la temperatura")
+![Función de autocorrelaicón de la temperatura](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/funci%C3%B3n%20autocorrelaci%C3%B3n.png?raw=true "Función de autocorrelaicón de la temperatura")
 
-![Función autocorrelación parcial](https://github.com/ivanna0994/seriesdetiempo/blob/main/Funci%C3%B3n%20autocorrelaci%C3%B3n%20parcial.png?raw=true "Función autocorrelación parcial")
+![Función autocorrelación parcial](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Funci%C3%B3n%20autocorrelaci%C3%B3n%20parcial.png?raw=true "Función autocorrelación parcial")
 
 ## Función de Autocorrelación (ACF)
 
@@ -198,7 +201,7 @@ adf_results = {
 
 adf_results
 ```
-![Test Dickey-Fuller ](https://github.com/ivanna0994/seriesdetiempo/blob/main/dickey%20fuller.png?raw=true "Test Dickey-Fuller ")
+![Test Dickey-Fuller ](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/dickey%20fuller.png?raw=true "Test Dickey-Fuller ")
 
 La hipótesis nula (H0) en la prueba de Dickey-Fuller establece que la serie no es estacionaria (tiene tendencia o variaciones dependientes del tiempo).
 Como el estadístico ADF (-3.59) es menor que el valor crítico al 5% (-2.86) y el p-value (0.006) es menor que 0.05, rechazamos la hipótesis nula.
@@ -207,7 +210,7 @@ Esto indica que la serie es estacionaria a un nivel de significancia del 5%.
 ## Visualización de la media y varianza en submuestras
 Esto con el fin de evaluar si cambian con el tiempo.
 
-![Media y varianza submuestras](https://github.com/ivanna0994/seriesdetiempo/blob/main/media%20varianza%20submuestras.png?raw=true "Media y varianza submuestras")
+![Media y varianza submuestras](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/media%20varianza%20submuestras.png?raw=true "Media y varianza submuestras")
 
 Se observa un aumento progresivo en la media de la temperatura a medida que avanzamos en el tiempo. El primer segmento tiene una media más baja, mientras que los segmentos posteriores muestran valores crecientes. Esto indica que la serie presenta tendencia ascendente, lo que sugiere que no es estacionaria en media.
 
@@ -219,7 +222,7 @@ La tendencia en la serie sugiere que debemos aplicar diferenciación, que consis
 
 # Serie diferenciada
 
-![Serie Diferenciada](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/serie%20de%20tiempo%20diferenciada.png)
+![Serie Diferenciada](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/figuras/serie%20de%20tiempo%20diferenciada.png)
 
 
 Si la varianza cambia con el tiempo, podemos aplicar una transformación 
@@ -228,7 +231,7 @@ Hay picos extremos negativos que podrían indicar outliers, pero no parecen form
 
 # Transformación de los datos
 
-![Transformación logarítmica](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/Transformaci%C3%B3n.png)
+![Transformación logarítmica](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/figuras/Transformaci%C3%B3n.png)
 
 
 Después de estos ajustes, debemos volver a aplicar la prueba Dickey-Fuller (ADF) para verificar si la serie ya es estacionaria.
@@ -246,7 +249,7 @@ Utilizar la serie directamente en LSTM, como ya hicimos.
 Incluir otras variables climáticas (humedad, presión, viento) si quieres extender el modelo a una versión multivariada.
 
 # Matriz de Correlación entre Series Temporales
-![Matriz de correlación](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/Matriz%20de%20correlaci%C3%B3n.png)
+![Matriz de correlación](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/figuras/Matriz%20de%20correlaci%C3%B3n.png)
 
 En la matriz de correlación presentada en la imagen, se puede observar que la variable Tdew (degC) tiene una alta correlación positiva con T (degC), con un valor de 0.90. Esto indica que tanto la temperatura del aire (T) como la temperatura de rocío (Tdew) están fuertemente relacionadas.
 
@@ -257,7 +260,7 @@ Por último, es relevante mencionar que T (degC) está correlacionada negativame
 # Gráficos de Dispersión en el Tiempo
 Estos gráficos los realizaremos con el objetivo de detectar relaciones no lineales entre la temperatura y otras variables.
 
-![Dispersión](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/Gr%C3%A1ficos%20de%20dispersi%C3%B3n.png)
+![Dispersión](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/figuras/Gr%C3%A1ficos%20de%20dispersi%C3%B3n.png)
 
 En los gráficos se puede observar que la variable T (degC) (Temperatura) tiene varias relaciones no lineales con otras variables meteorológicas. A continuación, se analizan algunas de estas relaciones:
 
@@ -275,7 +278,7 @@ En resumen, varias de las relaciones entre la temperatura y otras variables son 
 
 Procedemos a realizar este análisis con el fin de detectar frecuencias dominantes en la serie.
 
-![Transformada](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/Transformada%20fourier.png)
+![Transformada](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/figuras/Transformada%20fourier.png)
 
 Gráfica Transformada de Fourier Después del pico inicial, la magnitud disminuye rápidamente a medida que aumenta la frecuencia. Esto indica que las componentes de alta frecuencia de la señal tienen una magnitud mucho menor, lo que puede sugerir que la señal es relativamente suave y no presenta fluctuaciones rápidas.
 
@@ -289,13 +292,13 @@ El espectro de potencia de la temperatura muestra que las variaciones de tempera
 
 # Detección de picos inusuales en la temperatura
 
-![Picos inusuales](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/Picos%20inusuales.png)
+![Picos inusuales](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/figuras/Picos%20inusuales.png)
 
 Los picos rojos en la gráfica indican eventos donde la temperatura alcanza valores extremos, como picos inusuales de calor o frío que no coinciden con el patrón cíclico habitual. Es posible que estos picos rojos representen eventos como olas de calor o heladas atípicas. La serie temporal muestra una periodicidad evidente, probablemente debida a variaciones estacionales (calor en verano y frío en invierno), mientras que las anomalías corresponden a eventos que se desvían de esta periodicidad. En resumen, la gráfica muestra cómo la temperatura varía a lo largo del tiempo, con algunos valores atípicos o extremos marcados como anomalías, lo que permite identificar eventos climáticos excepcionales.
 
 # Prueba para detectar outliers
 
-![Outliers](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/Outliers.png)
+![Outliers](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/figuras/Outliers.png)
 
 Rango central (IQR): La mayoría de los datos de temperatura se encuentran dentro del rango entre -10°C y 30°C, con la mediana cerca de los 10°C. Outliers: Los puntos fuera de los bigotes, ubicados por encima de 30°C y por debajo de -20°C, son considerados outliers. Estos valores son inusuales y podrían indicar fenómenos extremos o errores en los datos. Distribución de los datos: La temperatura tiene una distribución que se centra principalmente alrededor de la mediana (aproximadamente 10°C), con algunas fluctuaciones hacia valores más bajos y más alto.
 
