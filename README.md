@@ -346,7 +346,7 @@ El gráfico muestra un pico muy pronunciado en una frecuencia específica (cerca
 
 El espectro de potencia de la temperatura muestra que las variaciones de temperatura se concentran principalmente en frecuencias bajas, lo que indica que los cambios más significativos de temperatura ocurren a una escala temporal más larga, como los ciclos diarios o estacionales.
 
-##🔎 Detección de picos inusuales en la temperatura
+## 🔎Detección de picos inusuales en la temperatura
 
 ![Picos inusuales](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/figuras/Picos%20inusuales.png)
 
