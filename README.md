@@ -454,7 +454,9 @@ Hemos ejecutado el modelo SARIMA(1,1,1)(1,1,0,52) y ahora sí los resultados son
 ## 🔮 Pronóstico
 
 
-(![pronostico](https://github.com/user-attachments/assets/81e534c1-c910-4cc4-9e54-612b72b1a22c)
+![pronostico](https://github.com/user-attachments/assets/81e534c1-c910-4cc4-9e54-612b72b1a22c)
+
+El modelo SARIMA está funcionando correctamente para pronóstico a corto plazo. Puede mejorarse con ajuste fino de hiperparámetros o al incluir variables exógenas (en un SARIMAX multivariado).
 
 
 ## 🔧 **Estructura:**
@@ -510,7 +512,7 @@ Parte estacional: (1,1,1,7)
 
 ## 📊 **Métricas de Predicción**
 
-[![Metricas](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Metricas%20de%20predicci%C3%B3n.png?raw=true "Metricas")](http://https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Metricas%20de%20predicci%C3%B3n.png?raw=true "Metricas")
+[![Metricas](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/m%C3%A9tricas.png?raw=true)
 
 El RMSE indica un error promedio de 3.44°C en las predicciones semanales. El MAPE de 94% es alto indica que el modelo falla en capturar algunos patrones o los valores son muy cercanos a cero (lo que distorsiona el MAPE)
 
