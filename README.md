@@ -454,6 +454,9 @@ Hemos ejecutado el modelo SARIMA(1,1,1)(1,1,0,52) y ahora sí los resultados son
 ## 🔮 Pronóstico
 
 
+(![pronostico](https://github.com/user-attachments/assets/81e534c1-c910-4cc4-9e54-612b72b1a22c)
+
+
 ## 🔧 **Estructura:**
 
 ```python
