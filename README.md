@@ -408,6 +408,8 @@ Ajustes para la Modelización
 
  La serie de temperatura es predecible con modelos estacionales debido a su fuerte periodicidad.  La eliminación de outliers y la diferenciación mejoran la precisión de los modelos. Probar con modelos SARIMA, LSTM, o Modelos Transformers para optimizar las predicciones.
 
+ ---
+
 ## 🧠  Modelo SARIMA
 Ejecutaremos el modelo SARIMA(1,1,1)(1,1,0,52)
 
@@ -500,6 +502,8 @@ Parte estacional: SAR(1), D=1, s=52 (sin MA estacional)
 ## Comentarios: 
 
 Aunque ma.L1 no es significativo, mantenerlo no genera inestabilidad. El modelo es más estable y estadísticamente más confiable.
+
+---
 
 ## 📊 **Métricas de Predicción**
 
