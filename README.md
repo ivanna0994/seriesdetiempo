@@ -31,7 +31,7 @@ Para verificar sí existen o no datos faltantes, se procede a realizar la consul
 ```
 print(df.isnull().sum())
 ```
-![null data](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/figuras/Null%20datos.png)
+![null data](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/nulos.png?raw=true)
 
 
 Encontrándose así que no existen datos nulos. 
@@ -54,7 +54,7 @@ temperature_stats = df['T (degC)'].describe()
 print(temperature_stats)
 ```
 
-![Estadísticas de temperatura](https://raw.githubusercontent.com/ivanna0994/seriesdetiempo/main/figuras/temperature%20stats.png)
+![Estadísticas de temperatura](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/estad%C3%ADsticas.png?raw=true)
 
 
 Como se mencionó anteriormente, para la variable Temperatura en grados celsius, se tienen 420551 observaciones, con una media de 9.45° y una desviación estándar de 8.42°. Dentro de estas observaciones el valor mínimo que toma esta variable es de -23.01° mientras que su valor máximo es de 37.28°. Es importante señalar que el cincuenta por ciento de las temperaturas registradas se encuentra por encima de 9.42°.
@@ -108,7 +108,7 @@ if p > alpha:
 else:
  print('Sample does not look Normal (reject H0)')
 ```
-![Prueba Shapiro](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/shapiro-wilks.png?raw=true "Prueba Shapiro")
+![Prueba Shapiro](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/shapiro%20test.png?raw=true)
 
 La hipótesis nula del test establece que los datos siguen una distribución normal.
 Dado que el p-valor es extremadamente pequeño (< 0.05), rechazamos la hipótesis nula.
@@ -201,7 +201,7 @@ adf_results = {
 
 adf_results
 ```
-![Test Dickey-Fuller ](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/dickey%20fuller.png?raw=true "Test Dickey-Fuller ")
+![Test Dickey-Fuller ](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/dickeyfuller.png?raw=true)
 
 La hipótesis nula (H0) en la prueba de Dickey-Fuller establece que la serie no es estacionaria (tiene tendencia o variaciones dependientes del tiempo).
 Como el estadístico ADF (-3.59) es menor que el valor crítico al 5% (-2.86) y el p-value (0.006) es menor que 0.05, rechazamos la hipótesis nula.
