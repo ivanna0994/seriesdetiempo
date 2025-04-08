@@ -512,19 +512,55 @@ Parte estacional: (1,1,1,7)
 
 ## 📊 **Métricas de Predicción**
 
-[![Metricas](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/m%C3%A9tricas.png?raw=true)
+[Metricas](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/m%C3%A9tricas.png?raw=true)
 
-El RMSE indica un error promedio de 3.44°C en las predicciones semanales. El MAPE de 94% es alto indica que el modelo falla en capturar algunos patrones o los valores son muy cercanos a cero (lo que distorsiona el MAPE)
+## 📊 Evaluación del Modelo SARIMA(1,1,1)(1,1,1,7)
 
-Posiblemente hay semanas con valores muy pequeños (cerca de 0 °C) que están inflando el MAPE. Aun así, el RMSE es aceptable.
+## 🔢 Métricas de desempeño
 
-Aunque los residuos no son normales (común en datos climáticos), no hay autocorrelación ni heterocedasticidad significativa.
+| Métrica                   | Valor        | Interpretación                                                                 |
+|--------------------------|--------------|--------------------------------------------------------------------------------|
+| Tiempo de entrenamiento  | 0.32 segundos| El modelo se ajusta muy rápido. Ideal para ajustes iterativos.                |
+| RMSE                     | 8.4360       | Error promedio de ~8.4 °C por semana. Moderado, pero depende del contexto.    |
+| MAPE                     | 304.41%      | Muy alto. Indica errores extremos en ciertas predicciones. ⚠️                 |
 
-El modelo captura bien la estructura temporal, especialmente la estacionalidad. El MAPE alto sugiere explorar ajustes, por ejemplo:
+> ⚠️ **Nota sobre el MAPE**: Este valor exageradamente alto suele deberse a valores cercanos a 0 °C en el conjunto de prueba, lo que distorsiona el porcentaje. 
 
-1. Normalizar/estandarizar la temperatura
-2. Eliminar ma.L1
-3. Probar modelos no lineales como Prophet o LSTM
+---
+
+## 🧠 Interpretación del resumen estadístico del modelo
+
+| Parámetro   | Coef.    | P-valor | Significancia | Interpretación                                                       |
+|-------------|----------|---------|---------------|----------------------------------------------------------------------|
+| ar.L1       | 0.2070   | 0.318   | ❌ No sig.     | El componente autorregresivo no es relevante.                        |
+| ma.L1       | -0.4334  | 0.021   | ✅ Signif.     | El error pasado influye significativamente en el presente.           |
+| ar.S.L7     | -0.0039  | 0.485   | ❌ No sig.     | Componente estacional AR semanal no aporta valor significativo.     |
+| ma.S.L7     | -0.9995  | 0.691   | ❌ No sig.     | Fuerte en magnitud pero estadísticamente no significativo.           |
+| sigma²      | 11.6811  | 0.690   | ❌             | Varianza del error elevada pero dentro de lo esperable.              |
+
+---
+
+#### 🧪 Diagnóstico de residuos
+
+| Prueba                      | Resultado         | Interpretación                                                              |
+|----------------------------|-------------------|-----------------------------------------------------------------------------|
+| Ljung-Box (Q)              | Q=0.02, p=0.89     | ✅ No hay autocorrelación en los residuos. Buen indicador de ajuste.        |
+| Jarque-Bera                | JB=8.98, p=0.01    | ❌ Los residuos no siguen distribución normal. Común en datos reales.       |
+| Skew / Kurtosis            | 0.16 / 3.76        | Ligera asimetría y colas más pesadas de lo normal.                         |
+| Heterocedasticidad (H)     | p=0.29             | No se evidencia variación no constante en la varianza.                     |
+
+---
+
+#### ⚙️ Recomendaciones para mejorar el modelo
+
+- Probar con estacionalidad **anual (`s=52`)** en lugar de semanal.
+- Eliminar componentes **no significativos** (`ar.S.L7`, `ma.S.L7`) y comparar AIC/BIC.
+- Usar **SMAPE** como métrica alternativa al MAPE.
+- Considerar modelos **no lineales** (LSTM, Prophet) si se desea mejorar la precisión.
+- Realizar una **búsqueda de hiperparámetros automatizada** (`pmdarima.auto_arima`).
+
+---
+
 
 
 
