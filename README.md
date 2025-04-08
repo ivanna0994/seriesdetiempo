@@ -1,9 +1,7 @@
 <h1 align="center">🌡️ Predicción de la Temperatura del Aire</h1>
 <h3 align="center">Comparación y Optimización de Modelos de Series de Tiempo y Aprendizaje Automático</h3>
 
-<p align="center">
-  <img src="figuras/banner_temperatura.png" width="80%" alt="Banner del proyecto">
-</p>
+
 
 ---
 
