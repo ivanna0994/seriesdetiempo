@@ -368,17 +368,18 @@ Dependencia Temporal: La temperatura de un día está altamente correlacionada c
 
 Anomalías y Eventos Extremos
 
-Picos inusuales identificados mediante análisis visual y pruebas estadísticas (IQR y Z-score).  Algunos outliers coinciden con eventos climáticos extremos como olas de calor o fríos intensos. ✔Otros valores atípicos pueden deberse a errores de medición, que podrían afectar la precisión de los modelos predictivos.
+Picos inusuales identificados mediante análisis visual y pruebas estadísticas (IQR y Z-score).  Algunos outliers coinciden con eventos climáticos extremos como olas de calor o fríos intensos. Otros valores atípicos pueden deberse a errores de medición, que podrían afectar la precisión de los modelos predictivos.
 
 Análisis de Estacionariedad
 
- La serie original NO era estacionaria, debido a la tendencia ascendente. La diferenciación (d=1) permitió hacerla estacionaria, confirmada por la prueba Dickey-Fuller (ADF). Los ciclos estacionales sugieren que un modelo SARIMA es más adecuado que un ARIMA simple.
+La serie original NO era estacionaria, debido a la tendencia ascendente. La diferenciación (d=1) permitió hacerla estacionaria, confirmada por la prueba Dickey-Fuller (ADF). Los ciclos estacionales sugieren que un modelo SARIMA es más adecuado que un ARIMA simple.
 
-## Pasos a seguir:
+## 🧾 Pasos a seguir:
 
 Ajustes para la Modelización
 
-**   SARIMA (p,d,q)(P,D,Q,s)** 
+**SARIMA (p,d,q)(P,D,Q,s)** 
+
 - Captura tanto la tendencia como la estacionalidad anual. 
 - Se recomienda optimizar los parámetros con técnicas como Grid Search o Auto-SARIMA.
 
@@ -389,7 +390,7 @@ Ajustes para la Modelización
 
 **Manejo de Problemas Detectados**
 
--No Estacionariedad 
+- No Estacionariedad 
 - Aplicar diferenciación (ya realizada). 
 - Usar modelos con términos estacionales (SARIMA, Prophet, LSTM con ventanas de tiempo).
 
@@ -459,7 +460,7 @@ El modelo logra proyectar un patrón estacional coherente y suavizado, lo que in
 
 [![Resultados](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Sarima%20Optimizado.png?raw=true "Resultados")](http://https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Sarima%20Optimizado.png?raw=true "Resultados")
 
-**Estructura:**
+## 🔧 **Estructura:**
 
 ```python
 SARIMAX(1, 1, 1)x(1, 1, [], 52)
