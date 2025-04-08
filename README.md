@@ -497,9 +497,9 @@ Parte estacional: SAR(1), D=1, s=52 (sin MA estacional)
 | Heterocedasticidad H   | 0.68      | ✅ Varianza residual aceptable                 |
 | Kurtosis               | 4.07      | Leve colas pesadas, normal en clima           |
 
-Comentarios: 
-Aunque ma.L1 no es significativo, mantenerlo no genera inestabilidad 
-El modelo es más estable y estadísticamente más confiable.
+## Comentarios: 
+
+Aunque ma.L1 no es significativo, mantenerlo no genera inestabilidad. El modelo es más estable y estadísticamente más confiable.
 
 ## 📊 **Métricas de Predicción**
 
