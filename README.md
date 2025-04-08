@@ -26,15 +26,26 @@ También se explora la posibilidad de desarrollar un modelo mejorado que combine
 ---
 
 ````python
-#Cargamos librerias
+# 🔧 Manipulación de datos
 import pandas as pd
 import numpy as np
+
+# 🎨 Visualización
 import seaborn as sns
+
+# 📊 Descomposición estacional de series temporales
 from statsmodels.tsa.seasonal import seasonal_decompose
+
+# 📈 Modelos estadísticos
 import statsmodels.api as sm
+
+# 🧪 Pruebas estadísticas
 from scipy.stats import shapiro
+
+# 💻 Herramientas de entorno interactivo (Jupyter)
 from IPython import get_ipython
-from IPython.display import display`
+from IPython.display import display
+
 ````
 ## Leyendo el archivo y cargando nuestros datos 
 ```python
