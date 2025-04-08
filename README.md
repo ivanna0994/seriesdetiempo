@@ -411,56 +411,48 @@ Ajustes para la Modelización
  ---
 
 ## 🧠  Modelo SARIMA
-Ejecutaremos el modelo SARIMA(1,1,1)(1,1,0,52)
+
+Ejecutaremos el modelo (1,1,1)(1,1,1,7)
 
 ```python
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 
-# 📅 Resampleo semanal de la temperatura promedio (hasta 2013)
-df_weekly = df["T (degC)"].resample("W").mean()
-df_weekly = df_weekly[:'2013']  # Limitar a datos hasta 2013
+# 📅 Resampleo diario 
+df_daily = df_temp.resample('D').mean()
 
 # 🧠 Ajuste del modelo SARIMA refinado
-modelo_refinado = SARIMAX(
-    df_weekly,
-    order=(1, 1, 1),
-    seasonal_order=(1, 1, 0, 52),  # Estacionalidad anual semanal (sin componente MA estacional)
-    enforce_stationarity=False,
-    enforce_invertibility=False
-).fit(disp=False)
+model = SARIMAX(df_daily, 
+                order=(1,1,1), 
+                seasonal_order=(1,1,1,7),  # Estacionalidad semanal
+                enforce_stationarity=False, 
+                enforce_invertibility=False)
+results = model.fit()
 
 # 📋 Mostrar resumen del modelo
-print(modelo_refinado.summary())
+print(results.summary())
 
-# 📈 Visualización del ajuste del modelo
-df_weekly.plot(label="Observado", figsize=(14, 5))
-modelo_refinado.fittedvalues.plot(label="Ajustado")
-plt.title("SARIMA Refinado (1,1,1)(1,1,0,52)")
+
+# 🔮 Pronóstico 
+forecast = results.get_forecast(steps=30)
+forecast_ci = forecast.conf_int()
+
+df_daily.plot(label='Observado', figsize=(12, 6))
+forecast.predicted_mean.plot(label='Pronóstico')
+plt.fill_between(forecast_ci.index, 
+                 forecast_ci.iloc[:, 0], 
+                 forecast_ci.iloc[:, 1], 
+                 color='pink', alpha=0.3)
+plt.title("Pronóstico de Temperatura - SARIMA")
 plt.legend()
-plt.grid(True)
-plt.show()
-
-# 🔮 Pronóstico para las siguientes 52 semanas
-forecast = modelo_refinado.forecast(steps=52)
-forecast.plot(title="Pronóstico 1 año - Modelo Refinado", figsize=(14, 5))
-plt.grid(True)
 plt.show()
 
 
 ```
+
 Hemos ejecutado el modelo SARIMA(1,1,1)(1,1,0,52) y ahora sí los resultados son estables y bien condicionados. Vamos a analizarlos:
 
-[![Sarima Refinado](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Sarima%20refinado.png?raw=true "Sarima Refinado")](http://https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Sarima%20refinado.png?raw=true "Sarima Refinado")
+## 🔮 Pronóstico
 
-Esta gráfica muestra la comparación entre la serie de temperatura observada (línea azul) y la serie ajustada por el modelo SARIMA(1,1,1)(1,1,0,52) (línea naranja), utilizando datos semanales de temperatura promedio en Jena (Alemania) entre 2009 y 2013.
-
-El modelo logra capturar correctamente la estacionalidad anual, con picos en verano y descensos en invierno, como se aprecia en las repeticiones cíclicas. También se observa que el modelo sigue bien la tendencia general de la serie, adaptándose a los cambios interanuales.
-
-[![Pronostico a un año](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Figure_1.png?raw=true "Pronostico a un año")](http://https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Figure_1.png?raw=true "Pronostico a un año")
-
-El modelo logra proyectar un patrón estacional coherente y suavizado, lo que indica un buen ajuste y capacidad predictiva. La curva muestra una transición gradual entre estaciones, sin picos atípicos ni irregularidades, lo que es una señal de estabilidad del modelo.
-
-[![Resultados](https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Sarima%20Optimizado.png?raw=true "Resultados")](http://https://github.com/ivanna0994/seriesdetiempo/blob/main/figuras/Sarima%20Optimizado.png?raw=true "Resultados")
 
 ## 🔧 **Estructura:**
 
@@ -471,37 +463,45 @@ SARIMAX(1, 1, 1)x(1, 1, [], 52)
 
 Parte no estacional: ARIMA(1,1,1)
 
-Parte estacional: SAR(1), D=1, s=52 (sin MA estacional)
-
-## **Indicadores de Ajuste**
-
-| Métrica | Valor   | Comparación con modelo anterior                                              |
-|---------|---------|------------------------------------------------------------------------------|
-| AIC     | 847.49  | 🔻 ¡Mejoró! (antes 5335.3, pero en log-likelihood diferente)                 |
-| BIC     | 859.67  | Consistente con menor complejidad                                            |
-| HQIC    | 852.44  | También bajó                                                                 |
+Parte estacional: (1,1,1,7)
+                                                               |
 
 ## **Coeficientes del Modelo**
 
-| Parámetro   | Coef  | p-valor | ¿Significativo? | Observación                                 |
-|-------------|-------|---------|------------------|----------------------------------------------|
-| ar.L1       | 0.433 | 0.000   | ✅ Sí            | Influencia directa del rezago                |
-| ma.L1       | -1.000| 0.988   | ❌ No            | No significativo, posible sobreajuste        |
-| ar.S.L52    | -0.653| 0.000   | ✅ Sí            | Fuerte estacionalidad anual                  |
-| sigma2      | 12.85 | 0.988   | ❌ No            | Alta incertidumbre en la varianza residual   |
 
-## **Diagnosticos de resultados**
+| Parámetro  | Coef.    | P-valor | Interpretación                                                                 |
+|------------|----------|---------|--------------------------------------------------------------------------------|
+| ar.L1      | -0.4414  | 0.000   |✅ Significativo. Efecto autorregresivo de primer orden negativo.                |
+| ma.L1      | 0.5735   | 0.000   |✅ Significativo. Componente de media móvil fuerte.                              |
+| ar.S.L7    | -0.0058  | 0.170   |❌No significativo. Componente estacional autorregresivo semanal débil.        |
+| ma.S.L7    | -1.0031  | 0.000   |✅ Muy significativo. Fuerte componente estacional de media móvil semanal.       |
+| sigma2     | 5.61     | —       |   Varianza del error (alta pero esperada en datos de temperatura).              |
 
-| Prueba                 | Resultado | Interpretación                                 |
-|------------------------|-----------|------------------------------------------------|
-| Ljung-Box (Q)          | 0.13      | ✅ No hay autocorrelación                      |
-| Jarque-Bera (JB)       | 0.01      | ❌ Residuos no son normales                    |
-| Heterocedasticidad H   | 0.68      | ✅ Varianza residual aceptable                 |
-| Kurtosis               | 4.07      | Leve colas pesadas, normal en clima           |
 
-## Comentarios: 
 
-Aunque ma.L1 no es significativo, mantenerlo no genera inestabilidad. El modelo es más estable y estadísticamente más confiable.
+## 🧪 Diagnóstico de residuos
+
+| Prueba / Estadístico         | Valor               | Interpretación                                                                 |
+|-----------------------------|---------------------|--------------------------------------------------------------------------------|
+| Ljung-Box Q                 | Q = 1.44, p ≈ 0.23   |✅ No hay autocorrelación significativa en los residuos.                         |
+| Jarque-Bera                 | JB = 68.77, p ≈ 0.00 | ⚠️ Los residuos no siguen una distribución normal (común en series reales).      |
+| Skew / Kurtosis             | Skew = -0.05        | Ligera asimetría.                                                              |
+|                             | Kurtosis = 3.75     | Colas más pesadas que una distribución normal.                                 |
+
+---
+
+### Comentarios:
+
+## ✅ Fortalezas
+- Buen ajuste general del modelo (bajo AIC).
+- Captura patrones estacionales semanales (MA estacional significativo).
+- Sin autocorrelación en los residuos.
+
+## ⚠️ Aspectos por mejorar o explorar
+- El componente estacional AR(7) no es significativo. Podría removerse y comparar el AIC.
+- Los residuos no son normales → considerar métodos robustos si esto es crítico.
+- Podrías probar una estacionalidad anual (`s=365`) si la periodicidad anual es más dominante que la semanal (lo cual parece probable en temperatura).
+
 
 ---
 
