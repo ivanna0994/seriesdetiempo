@@ -1,12 +1,31 @@
-# Predicción de la Temperatura del Aire: Comparación y Optimización de Modelos de Series de Tiempo y Aprendizaje Automático
+<h1 align="center">🌡️ Predicción de la Temperatura del Aire</h1>
+<h3 align="center">Comparación y Optimización de Modelos de Series de Tiempo y Aprendizaje Automático</h3>
 
-Pregunta de investigación:
-¿Cuál es la estrategia más precisa y eficiente para predecir la temperatura del aire: modelos de series de tiempo que capturan autocorrelaciones o modelos de regresión basados en variables climáticas? Además, ¿es posible desarrollar un modelo mejorado que optimice la precisión de las predicciones mediante técnicas de series de tiempo y aprendizaje automático?
- 
-El conjunto de datos Jena Climate es una serie temporal meteorológica registrada en la estación meteorológica del Instituto Max Planck de Bioquímica en Jena, Alemania.
-Este se encuentra compuesto por 14 variables diferentes (como la temperatura del aire, la presión atmosférica, la humedad, la dirección del viento, entre otras) que fueron registradas cada 10 minutos durante varios años.
+<p align="center">
+  <img src="figuras/banner_temperatura.png" width="80%" alt="Banner del proyecto">
+</p>
 
-Este conjunto de datos abarca información desde el 1 de enero de 2009 hasta el 31 de diciembre de 2016
+---
+
+### 📌 Descripción del Proyecto
+
+Este proyecto analiza diferentes estrategias para predecir la temperatura del aire a partir de datos meteorológicos registrados por la estación del Instituto Max Planck de Bioquímica en Jena, Alemania.  
+
+Se busca responder:  
+**¿Cuál es la estrategia más precisa y eficiente para predecir la temperatura del aire: modelos de series de tiempo que capturan autocorrelaciones o modelos de regresión basados en variables climáticas?**
+
+También se explora la posibilidad de desarrollar un modelo mejorado que combine ambos enfoques: **series de tiempo + aprendizaje automático**.
+
+---
+
+### 📊 Conjunto de Datos
+
+- **Nombre:** Jena Climate
+- **Periodo:** 2009-01-01 a 2016-12-31
+- **Frecuencia:** cada 10 minutos
+- **Variables:** temperatura del aire, presión, humedad, dirección del viento, entre otras (14 en total)
+
+---
 
 ````python
 #Cargamos librerias
